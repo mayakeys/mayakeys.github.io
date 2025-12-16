@@ -73,3 +73,28 @@ a:hover {
   color: var(--accent); 
 
 }
+.project {
+  margin-bottom: 4rem;
+}
+
+.project-title {
+  font-family: "Georgia", "Times New Roman", serif;
+  font-size: 1.6rem;
+  margin-bottom: 0.25rem;
+}
+
+.project-meta {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+.project p {
+  margin-bottom: 0.75rem;
+}
+
+.project-links a {
+  font-size: 0.95rem;
+  margin-right: 16px;
+}
+
