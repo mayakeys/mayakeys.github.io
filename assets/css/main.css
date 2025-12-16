@@ -44,3 +44,31 @@ a {
 a:hover {
   text-decoration: underline;
 }
+
+.nav {
+  border-bottom: 1px solid #eee;
+}
+
+.nav-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-name {
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.nav a {
+  margin-left: 24px;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+}
+
+.nav a:hover {
+  color: var(--text-main);
+}
