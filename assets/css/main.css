@@ -22,20 +22,17 @@ body {
 /* =========================================================
    HERO
    ========================================================= */
-
+/* hero stays purely visual */
 #hero {
-    
   position: fixed;
   inset: 0;
   background: radial-gradient(circle at center, #0f172a, #020617);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 9999;
-
-  transform: translateY(0);
-  transition: transform 0.8s ease, opacity 0.8s ease;
+  z-index: 1000;
 }
+
 
 .hero-content {
   text-align: center;
@@ -64,7 +61,9 @@ body {
   transform: translate(-100%, 0) scale(0.75);
 }
 
-
+.hero-image {
+  box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+}
 
 .hero-name {
   font-family: "Georgia", "Times New Roman", serif;
