@@ -44,9 +44,11 @@ body {
 .hero-image {
   width: 140px;
   height: 140px;
-  border-radius: 50%;
+  object-fit: cover;
+  border-radius: 8px; 
   margin-bottom: 1rem;
 }
+
 
 .hero-name {
   font-family: "Georgia", "Times New Roman", serif;
