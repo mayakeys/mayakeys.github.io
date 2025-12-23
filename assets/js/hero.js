@@ -10,6 +10,8 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
+  target.textContent = "";
+
   function type() {
     if (i < text.length) {
       target.textContent += text.charAt(i);
