@@ -33,9 +33,60 @@ body {
   z-index: 1000;
 }
 
+
+.hero-content {
+  text-align: center;
+  color: white;
+}
+
+.hero-image {
+  position: fixed;            
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1.2);
+  width: 220px;
+  height: 220px;
+  border-radius: 16px;
+  object-fit: cover;
+  transition:
+    transform 1.1s cubic-bezier(0.22, 1, 0.36, 1),
+    top 1.1s cubic-bezier(0.22, 1, 0.36, 1),
+    left 1.1s cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: 1001;
+}
+
+.hero-image.to-corner {
+  top: 24px;
+  left: calc(100% - 24px);
+  transform: translate(-100%, 0) scale(0.75);
+}
+
 .hero-image {
   box-shadow: 0 20px 60px rgba(0,0,0,0.35);
 }
+
+.hero-name {
+  font-family: "Georgia", "Times New Roman", serif;
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+}
+
+.hero-tagline {
+  font-size: 1.1rem;
+  opacity: 0.9;
+}
+
+.cursor {
+  animation: blink 1s steps(1) infinite;
+}
+
+.hero-tagline {
+  font-size: 1.1rem;
+  opacity: 1;
+  margin-top: 0.4rem;
+}
+
 
 @keyframes blink {
   50% { opacity: 0; }
@@ -123,4 +174,5 @@ a {
 a:hover {
   text-decoration: underline;
 }
+
 
