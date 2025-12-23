@@ -22,19 +22,23 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+
   function exitHero() {
-    const hero = document.getElementById("hero");
-    const content = document.getElementById("site-content");
+   const hero = document.getElementById("hero");
+   const content = document.getElementById("site-content");
 
-    hero.style.transition = "transform 0.9s ease, opacity 0.9s ease";
-    hero.style.transform = "translateY(-100%)";
-    hero.style.opacity = "0";
+   // Stop cursor
+   document.querySelector(".cursor").style.display = "none";
 
-    content.classList.remove("hidden");
-    content.style.opacity = "1";
+   // Trigger morph animation
+   hero.classList.add("hero--compact");
 
-    setTimeout(() => hero.remove(), 950);
+   // Reveal page content AFTER movement
+   setTimeout(() => {
+     content.classList.add("visible");
+   }, 700);
   }
+
 
   type();
 });
