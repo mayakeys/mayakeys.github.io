@@ -11,23 +11,25 @@
 <body class="hero-mode">
 
   <!-- HERO OVERLAY (elements are positioned where they'll END UP; intro uses transforms only) -->
-  <div id="hero" aria-hidden="true">
-    <div class="hero-bg"></div>
+  <div id="hero">
+   <div class="hero-content">
 
-    <!-- These are fixed in their FINAL locations; JS temporarily transforms them to center. -->
-    <img
-      id="hero-photo"
-      src="assets/images/profile.jpg"
-      alt="Maya Keys"
-      class="hero-photo"
-    />
-
-    <div id="hero-text" class="hero-text">
-      <div class="hero-name">Maya Keys</div>
-      <div class="hero-tagline">
-        <span id="typed-text"></span><span class="cursor">|</span>
-      </div>
+    <div id="hero-photo">
+      <img
+        src="assets/images/profile.jpg"
+        alt="Maya Keys"
+        class="hero-image"
+      />
     </div>
+
+    <div id="hero-text">
+      <h1 class="hero-name">Maya Keys</h1>
+      <p class="hero-tagline">
+        <span id="typed-text"></span><span class="cursor">|</span>
+      </p>
+    </div>
+
+   </div>
   </div>
 
   <!-- MAIN SITE CONTENT -->
