@@ -6,16 +6,16 @@ document.addEventListener("DOMContentLoaded", () => {
   let i = 0;
 
   function type() {
-    if (i < text.length) {
-      target.textContent += text[i++];
-      setTimeout(type, 45);
-    } else {
-      setTimeout(() => {
-        document.body.classList.remove("hero-active");
-        document.body.classList.add("hero-done");
-      }, 600);
-    }
+  if (i < text.length) {
+    target.textContent += text[i++];
+    setTimeout(type, 45);
+  } else {
+    setTimeout(() => {
+      exitHero(); // 👈 THIS WAS MISSING
+    }, 600);
   }
+}
+
  function exitHero() {
   const hero = document.getElementById("hero");
   const img = hero.querySelector(".hero-image");
