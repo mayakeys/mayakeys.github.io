@@ -1,8 +1,14 @@
-const text = "Learning-based robotics and machine learning for real-world systems.";
+const target = document.getElementById("typed-text");
+if (!target) {
+  document.body.style.overflow = "auto";
+  return;
+}
+
+const text =
+  "Learning-based robotics and machine learning for real-world systems.";
 const speed = 50;
 
 let i = 0;
-const target = document.getElementById("typed-text");
 
 function type() {
   if (i < text.length) {
@@ -18,13 +24,13 @@ function exitHero() {
   const hero = document.getElementById("hero");
   const content = document.getElementById("site-content");
 
-  hero.style.transition = "transform 0.8s ease, opacity 0.8s ease";
   hero.style.transform = "translateY(-100%)";
   hero.style.opacity = "0";
 
   content.classList.remove("hidden");
-  content.style.transition = "opacity 0.8s ease";
   content.style.opacity = "1";
+
+  document.body.style.overflow = "auto";
 
   setTimeout(() => hero.remove(), 900);
 }
