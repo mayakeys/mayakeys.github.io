@@ -161,63 +161,61 @@ a:hover {
   text-decoration: underline;
 }
 
-/* ================= HERO TRANSITION ================= */
+
+
+/* ================= HERO MOTION ================= */
 
 #hero {
-  transition: background 0.6s ease;
-}
-
-.hero-content {
-  transition: all 0.9s ease;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-/* Final compact state */
-.hero--compact {
-  background: white;
-}
-
-.hero--compact .hero-content {
   position: fixed;
-  top: 24px;
-  left: 24px;
-  right: 24px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
+  inset: 0;
+  background: radial-gradient(circle at center, #0f172a, #020617);
+  z-index: 1000;
 }
 
-/* Profile image moves top-right */
+/* Lock hero elements so transform works */
+.hero-image,
+.hero-text {
+  position: fixed;
+  transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.6s ease;
+}
+
+/* Initial center positions */
+.hero-image {
+  width: 140px;
+  height: 140px;
+  border-radius: 12px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -160%);
+}
+
+.hero-text {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -20%);
+  text-align: center;
+  color: white;
+}
+
+/* ===== FINAL POSITIONS ===== */
+
 .hero--compact .hero-image {
-  width: 64px;
-  height: 64px;
+  transform: translate(calc(100vw - 96px), 24px) scale(0.45);
 }
 
-/* Name + tagline shrink and move left */
 .hero--compact .hero-text {
+  transform: translate(24px, 24px);
   text-align: left;
+  color: var(--text-main);
 }
 
 .hero--compact .hero-name {
   font-size: 1.4rem;
   margin: 0;
-  color: var(--text-main);
 }
 
 .hero--compact .hero-tagline {
   font-size: 0.9rem;
   color: var(--text-muted);
 }
-
-/* Fade-in site content */
-#site-content {
-  transition: opacity 0.6s ease;
-}
-
-#site-content.visible {
-  opacity: 1;
-}
-

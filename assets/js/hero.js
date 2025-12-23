@@ -23,22 +23,20 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
-  function exitHero() {
-   const hero = document.getElementById("hero");
-   const content = document.getElementById("site-content");
+ function exitHero() {
+  const hero = document.getElementById("hero");
+  const content = document.getElementById("site-content");
 
-   // Stop cursor
-   document.querySelector(".cursor").style.display = "none";
+  // Stop cursor blinking
+  document.querySelector(".cursor").style.display = "none";
 
-   // Trigger morph animation
-   hero.classList.add("hero--compact");
+  // Trigger transform animation
+  hero.classList.add("hero--compact");
 
-   // Reveal page content AFTER movement
-   setTimeout(() => {
-     content.classList.add("visible");
-   }, 700);
-  }
-
-
+  // Fade in rest of site AFTER motion starts
+  setTimeout(() => {
+    content.classList.add("visible");
+  }, 600);
+ }
   type();
 });
