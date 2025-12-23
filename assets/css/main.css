@@ -174,97 +174,59 @@ body.hero-mode {
 #hero {
   position: fixed;
   inset: 0;
+  background: radial-gradient(circle, #0f172a, #020617);
   z-index: 1000;
-  pointer-events: none; /* hero is visual only */
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4rem;
+
+  transition: background 0.8s ease;
 }
 
-/* background */
-.hero-bg {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at center, #0f172a, #020617);
+.hero-image {
+  width: 140px;
+  border-radius: 16px;
+  transition: transform 1s ease, width 1s ease;
 }
 
-/* FINAL positions (top-left text, top-right photo) */
 .hero-text {
-  position: fixed;
-  left: 72px;
-  top: 140px;
-  color: #fff;
-  z-index: 1002;
-
-  /* this is what animates */
-  transform: translate3d(0,0,0);
-  transition: transform 900ms cubic-bezier(.2,.8,.2,1), opacity 500ms ease;
-  will-change: transform;
+  transition: transform 1s ease;
 }
 
 .hero-name {
-  font-family: "Georgia", "Times New Roman", serif;
-  font-size: 5.2rem;
-  font-weight: 700;
-  line-height: 1.05;
-  margin-bottom: 16px;
+  font-size: 3.5rem;
 }
 
 .hero-tagline {
-  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: 1.8rem;
-  line-height: 1.5;
-  opacity: 0.92;
-  max-width: 700px;
+  font-size: 1.25rem;
 }
 
-/* Photo FINAL position */
-.hero-photo {
-  position: fixed;
-  right: 64px;
-  top: 72px;
-  width: 220px;
-  height: 220px;
-  border-radius: 18px;
-  object-fit: cover;
-  z-index: 1002;
 
-  transform: translate3d(0,0,0);
-  transition: transform 900ms cubic-bezier(.2,.8,.2,1), opacity 500ms ease;
-  will-change: transform;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.35);
-}
-
-.cursor {
-  animation: blink 1s infinite;
-}
-@keyframes blink {
-  0%, 50% { opacity: 1; }
-  51%, 100% { opacity: 0; }
-}
-
-/* Main content reveal */
-.site-content {
-  position: relative;
-  z-index: 1;
-  transition: opacity 600ms ease;
-}
-.hidden {
-  opacity: 0;
+body.hero-done #hero {
+  background: transparent;
   pointer-events: none;
 }
 
-/* When hero finishes: transforms go to NONE (final positions), site fades in */
-body.hero-final .site-content {
+/* image slides to top-right AND GROWS */
+body.hero-done .hero-image {
+  width: 220px;
+  transform: translate(45vw, -35vh);
+}
+
+/* name slides to top-left */
+body.hero-done .hero-text {
+  transform: translate(-40vw, -38vh);
+}
+
+/* reveal rest of page */
+#site-content {
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+body.hero-done #site-content {
   opacity: 1;
-  pointer-events: auto;
 }
 
-body.hero-final #hero {
-  /* keep background for a beat, then JS removes */
-}
-
-/* Optional: responsive tweaks */
-@media (max-width: 900px) {
-  .hero-text { left: 24px; top: 120px; }
-  .hero-name { font-size: 3.4rem; }
-  .hero-tagline { font-size: 1.2rem; }
-  .hero-photo { width: 140px; height: 140px; right: 20px; top: 20px; }
-}
