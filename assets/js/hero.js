@@ -32,6 +32,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const nameClone = name.cloneNode(true);
   const tagClone = tagline.cloneNode(true);
 
+
+  imgClone.style.width = `${imgRect.width}px`;
+  imgClone.style.height = `${imgRect.height}px`;
+
+
   // Apply fixed positioning at exact start
   [imgClone, nameClone, tagClone].forEach(el => {
     el.style.position = "fixed";
@@ -56,7 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
   hero.style.visibility = "hidden";
 
   // Target END positions
-  const endImgX = window.innerWidth - 200;
+  const endImgX = window.innerWidth - imgRect.width - 48;
   const endImgY = 24;
 
   const endNameX = 64;
@@ -83,7 +88,9 @@ document.addEventListener("DOMContentLoaded", () => {
     imgClone.remove();
     nameClone.remove();
     tagClone.remove();
-    hero.remove();
+    hero.style.opacity = "0";
+    hero.style.pointerEvents = "none";
+
   }, 1100);
 }
 
