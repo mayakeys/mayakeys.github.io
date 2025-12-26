@@ -45,9 +45,6 @@ function initHeroTyping() {
     }
   }
 
-  let heroFinished = false;
-
-
   const hero = document.getElementById("hero");
   hero.addEventListener("transitionend", () => {
     if (document.body.classList.contains("hero-done")) {
@@ -65,15 +62,25 @@ function initHeroTyping() {
    ========================================================= */
 
 class Star {
-  constructor(cx, cy) {
-    const r = Math.random() * 120 + 40;
-    const a = Math.random() * Math.PI * 2;
-
+  constructor(cx, cy, theme = "hero") {
     this.cx = cx;
     this.cy = cy;
+    this.theme = theme;
+
+    const r =
+      theme === "nav"
+        ? Math.random() * 30 + 15   // 🔹 small nav orbits
+        : Math.random() * 120 + 40; // hero size
+
+    const a = Math.random() * Math.PI * 2;
+
     this.radius = r;
     this.angle = a;
-    this.speed = (Math.random() - 0.5) * 0.00015;
+
+    this.speed =
+      theme === "nav"
+        ? (Math.random() - 0.5) * 0.00035 // slightly faster
+        : (Math.random() - 0.5) * 0.00015;
   }
 
   update(dt) {
@@ -84,11 +91,17 @@ class Star {
 
   draw(ctx) {
     ctx.beginPath();
-    ctx.arc(this.x, this.y, 1.4, 0, Math.PI * 2);
-    ctx.fillStyle = "rgba(255,255,255,0.20)";
+    ctx.arc(this.x, this.y, 1.2, 0, Math.PI * 2);
+    ctx.fillStyle =
+      this.theme === "nav"
+        ? "rgba(80,140,210,0.45)"
+        : "rgba(255,255,255,0.20)";
     ctx.fill();
   }
 }
+
+
+
 
 const mouse = { x: null, y: null };
 
@@ -125,9 +138,10 @@ class BackgroundStar {
   }
 
   draw(ctx) {
+    const boost = document.body.classList.contains("hero-done") ? 0.15 : 0;
     const twinkle =
       this.baseAlpha +
-      Math.sin(this.twinklePhase) * 0.17; // subtle shimmer
+      Math.sin(this.twinklePhase) * 0.17 + boost;
 
     ctx.beginPath();
     ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
@@ -137,21 +151,19 @@ class BackgroundStar {
 }
 
 class Constellation {
-  constructor(cx, cy, count = 5) {
+  constructor(cx, cy, count = 5, theme = "hero") {
     this.cx = cx;
     this.cy = cy;
     this.stars = [];
-    this.drift = { x: 0, y: 0 };
-    this.timer = Math.floor(Math.random() * 360);
-    this.phase = Math.random() * Math.PI * 2;
+    this.theme = theme;
 
+    this.driftPhase = Math.random() * Math.PI * 2;
+    this.driftSpeed = theme === "nav" ? 0.00015 : 0;
 
-    // CREATE STARS FIRST
     for (let i = 0; i < count; i++) {
-      this.stars.push(new Star(cx, cy));
+      this.stars.push(new Star(cx, cy, theme));
     }
 
-    // THEN CREATE CONNECTIONS
     this.connections = [];
     for (let i = 0; i < this.stars.length; i++) {
       for (let j = i + 1; j < this.stars.length; j++) {
@@ -163,7 +175,17 @@ class Constellation {
   }
 
   update(dt) {
-    this.stars.forEach(s => s.update(dt));
+    if (this.theme === "nav") {
+      this.driftPhase += this.driftSpeed * dt;
+      this.cx += Math.sin(this.driftPhase) * 0.05;
+      this.cy += Math.cos(this.driftPhase) * 0.05;
+    }
+
+    this.stars.forEach(s => {
+      s.cx = this.cx;
+      s.cy = this.cy;
+      s.update(dt);
+    });
   }
 
   draw(ctx) {
@@ -171,7 +193,11 @@ class Constellation {
     const a = this.stars[i];
     const b = this.stars[j];
 
-    ctx.strokeStyle = "rgba(255,255,255,0.05)";
+    ctx.strokeStyle =
+      this.theme === "nav"
+        ? "rgba(80,140,210,0.18)"
+        : "rgba(255,255,255,0.05)";
+
     ctx.lineWidth = 0.6;
     ctx.beginPath();
     ctx.moveTo(a.x, a.y);
@@ -181,8 +207,27 @@ class Constellation {
 
   this.stars.forEach(s => s.draw(ctx));
 
-  // Subtle mouse connections
-  if (mouse.x !== null && mouse.y !== null) {
+  if (this.theme === "nav" && mouse.x !== null && mouse.y !== null) {
+    const rect = ctx.canvas.getBoundingClientRect();
+    const mx = mouse.x - rect.left;
+    const my = mouse.y - rect.top;
+
+    this.stars.forEach(s => {
+      const d = Math.hypot(s.x - mx, s.y - my);
+      if (d < 90) {
+        ctx.strokeStyle = "rgba(80,140,210,0.25)";
+        ctx.lineWidth = 0.6;
+        ctx.beginPath();
+        ctx.moveTo(s.x, s.y);
+        ctx.lineTo(mx, my);
+        ctx.stroke();
+      }
+    });
+  }
+
+
+
+  if (this.theme === "hero" && mouse.x !== null && mouse.y !== null) {
     this.stars.forEach(s => {
       const d = Math.hypot(s.x - mouse.x, s.y - mouse.y);
 
@@ -197,9 +242,10 @@ class Constellation {
         ctx.lineTo(mouse.x, mouse.y);
         ctx.stroke();
       }
-   });
- }
-}
+    });
+  }
+
+  }
 }
 
 function isFarEnough(x, y, existing, minDist) {
@@ -322,10 +368,59 @@ function enableScrollSkip() {
 }
 
 /* =========================================================
+   NAVBAR Constellations
+   ========================================================= */
+   function initNavConstellations() {
+    const canvas = document.getElementById("nav-canvas");
+    const ctx = canvas.getContext("2d");
+    const rect = canvas.getBoundingClientRect();
+
+    function resize() {
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+    }
+
+    resize();
+    window.addEventListener("resize", resize);
+
+    const constellations = [];
+    const COUNT = 6;
+
+    for (let i = 0; i < COUNT; i++) {
+      constellations.push(
+        new Constellation(
+          ((i + 0.5) / COUNT) * canvas.width,  // evenly spaced X
+          Math.random() * canvas.height,       // small vertical jitter
+          4 + Math.floor(Math.random() * 2),
+          "nav"
+        )
+      );
+    }
+
+    let lastTime = performance.now();
+    function animate(time) {
+      const delta = time - lastTime;
+      lastTime = time;
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      constellations.forEach(c => {
+        c.update(delta * 0.4); // 🔥 slow + controlled
+        c.draw(ctx);
+      });
+
+      requestAnimationFrame(animate);
+    }
+    requestAnimationFrame(animate);
+  }
+
+
+/* =========================================================
    BOOTSTRAP
    ========================================================= */
 document.addEventListener("DOMContentLoaded", () => {
   initHeroTyping();
   enableScrollSkip();
   initConstellations();
+  initNavConstellations();
 });
