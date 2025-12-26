@@ -2,6 +2,17 @@
    HERO TYPING + TRANSITION
    ========================================================= */
 
+let heroFinished = false;
+
+function finishHero() {
+  if (heroFinished) return;
+  heroFinished = true;
+
+  document.body.classList.add("hero-done");
+  document.body.style.overflow = "auto";
+}
+
+
 function initHeroTyping() {
   const line1 = "Computer Science @ Caltech";
   const line2 = "Computer Vision and Multimodal Learning";
@@ -21,17 +32,21 @@ function initHeroTyping() {
     }
   }
 
+
   function typeLine2() {
     if (j < line2.length) {
       target2.textContent += line2[j++];
       setTimeout(typeLine2, 45);
-    } else {
+    } 
+    else {
       setTimeout(() => {
-        document.body.classList.add("hero-done");
-        document.body.style.overflow = "auto";
+      setTimeout(finishHero, 400);
       }, 500);
     }
   }
+
+  let heroFinished = false;
+
 
   const hero = document.getElementById("hero");
   hero.addEventListener("transitionend", () => {
@@ -39,6 +54,7 @@ function initHeroTyping() {
       hero.style.pointerEvents = "none";
     }
   });
+
 
   typeLine1();
 }
@@ -289,12 +305,27 @@ function initConstellations() {
   requestAnimationFrame(animate);
 }
 
+function enableScrollSkip() {
+  const skip = () => finishHero();
+
+  window.addEventListener("wheel", skip, { once: true });
+  window.addEventListener("touchstart", skip, { once: true });
+  window.addEventListener(
+    "keydown",
+    e => {
+      if (["ArrowDown", "Space", "PageDown"].includes(e.code)) {
+        finishHero();
+      }
+    },
+    { once: true }
+  );
+}
 
 /* =========================================================
    BOOTSTRAP
    ========================================================= */
-
 document.addEventListener("DOMContentLoaded", () => {
   initHeroTyping();
+  enableScrollSkip();
   initConstellations();
 });
