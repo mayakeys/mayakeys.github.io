@@ -62,7 +62,6 @@ body {
 }
 
 .hero-content {
-  position: relative;
   z-index: 2;
   display: flex;            
   align-items: center;
@@ -74,6 +73,11 @@ body {
 body.hero-done .hero-bg {
   opacity: 0;
 }
+
+body.hero-done #hero {
+  pointer-events: none;
+}
+
 
 .hero-image {
   width: 220px;
@@ -89,6 +93,32 @@ body.hero-done .hero-bg {
   transition: transform 1.1s cubic-bezier(0.22, 1, 0.36, 1);
   
 }
+  /* top: 140px;  
+  left: 1165px;   */
+.profile-image {
+  position: fixed;
+  top: 140px;
+  left: 1165px;
+  z-index: 3;
+
+  width: 242px;
+  height: 242px;
+
+  border-radius: 4px;
+  object-fit: cover;
+
+  /* stronger shadow for white background */
+  box-shadow:
+    0 30px 80px rgba(0,0,0,0.18),
+    0 10px 30px rgba(0,0,0,0.12);
+
+  /* subtle backing to mimic hero glow */
+  background: rgba(255,255,255,0.6);
+  transform: none;
+
+  opacity: 0;
+}
+
 
 .hero-name {
   font-family: "Georgia", "Times New Roman", serif;
@@ -128,18 +158,25 @@ body.hero-done .cursor {
   opacity: 0;
 }
 
-/* image slides to top-right AND GROWS */
+/* image slides to top-right and grows */
 body.hero-done .hero-image {
-  transform: translate(15vw, -22vh);
+  transform: translate(14vw, -32vh);
+  scale: 1.1;
   border-radius: 4px;
   pointer-events: none;
+  top: 120px;   /* distance from top when stuck */
+  will-change: transform;
+}
+
+body.hero-done .profile-image {
+  pointer-events: none;
+  opacity: 1;
 }
 
 /* name slides to top-left */
 body.hero-done .hero-text {
   opacity: 0;
 }
-
 
 body.hero-done #site-content {
   background: rgba(255, 255, 255, 0.64);
@@ -155,29 +192,42 @@ body.hero-done #site-content {
   border-bottom: 1px solid var(--border-light);
   position: relative;
   overflow: hidden;
+  margin-top: -30px;
 }
 
 .nav-inner {
-  max-width: 900px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 24px;
+  padding: 45px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   position: relative;
+  word-spacing: 1.5em;
   z-index: 2;
 }
 
 .nav-name {
+  font-family: "Bookman", system-ui, serif;
+  font-size: 1.2rem;          /* big but not shouty */
   font-weight: 600;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.18em;
+  color: #000000;             /* deep blue */
+  margin-left: -12px;         /* nudges left subtly */
 }
 
-.nav a {
-  margin-left: 24px;
-  font-size: 0.95rem;
-  color: var(--text-muted);
-  text-decoration: none;
+.nav-links {
+  display: flex;
+  gap: 2.2rem;
+}
+
+.nav-links a {
+  font-family: "Trebuchet MS,", system-ui, sans-serif;
+  font-size: 1.0rem;
+  font-weight: 300;
+  letter-spacing: 0.03em;
+  /* text-transform: uppercase;  */
+  color: #000000;     
 }
 
 .nav a:hover {
@@ -190,13 +240,18 @@ body.hero-done #site-content {
 
 .container {
   max-width: 880px;
-  margin: 0 auto;
-  padding: 56px 24px 72px;
+  margin-left: 400px;
+  margin-right: 650px;  
+  margin-top: 50px;
+  /* padding-left: 40px;   
+  padding-right: 20px; */
 }
 
 h1 {
-  font-family: "Georgia", "Times New Roman", serif;
-  font-size: 3.4rem;
+  font-family: "Georgia", serif;
+  font-size: 3.1rem;
+  font-weight: 500;
+  line-height: 3.0rem;
   margin-bottom: 0.4rem;
 }
 
@@ -204,11 +259,13 @@ h1 {
   font-size: 1.1rem;
   color: var(--text-muted);
   margin-bottom: 2.2rem;
-  max-width: 520px;
 }
 
 p {
   margin-bottom: 1rem;
+  font-weight: 200;
+  line-height: 1.7rem;
+  font-family: "Noto Sans", sans-serif;
 }
 
 a {
@@ -216,14 +273,10 @@ a {
   text-decoration: none;
 }
 
-/* a:hover {
-  text-decoration: underline;
-} */
-
 .nav-home {
   text-decoration: none;
   color: var(--text-main);
-  font-weight: 600;
+  font-weight: 800;
   letter-spacing: 0.02em;
   transition: 
     color 0.25s ease,
@@ -244,7 +297,6 @@ a {
   background: #ffffff;
   border-bottom: 1px solid #eaeaea;
 }
-
 
 /* canvas sits behind nav content */
 #nav-canvas {

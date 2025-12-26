@@ -12,7 +12,31 @@ function finishHero() {
 
   document.body.classList.add("hero-done");
   document.body.style.overflow = "auto";
+
+  // removeHeroAfterTransition();
+  // remove hero AFTER animation completes
+  setTimeout(() => {
+    const hero = document.getElementById("hero");
+    if (hero) hero.remove();
+  }, 1200); // must be >= your hero transition time
 }
+
+// function removeHeroAfterTransition() {
+//   const hero = document.getElementById("hero");
+//   const heroImage = hero.querySelector(".hero-image");
+
+//   heroImage.addEventListener(
+//     "transitionend",
+//     (e) => {
+//       // only react to the transform finishing
+//       if (e.propertyName !== "transform") return;
+
+//       heroImage.style.display = "none";
+//       hero.remove(); 
+//     },
+//     { once: true }
+//   );
+// }
 
 
 function initHeroTyping() {
@@ -82,7 +106,7 @@ class Star {
     this.speed =
       theme === "nav"
         ? (Math.random() - 0.5) * 0.00035 // slightly faster
-        : (Math.random() - 0.5) * 0.00015;
+        : (Math.random() - 0.5) * 0.00035;
   }
 
   update(dt) {
@@ -195,12 +219,15 @@ class Constellation {
     const a = this.stars[i];
     const b = this.stars[j];
 
+    ctx.lineWidth = 0.6;
+
     ctx.strokeStyle =
       this.theme === "nav"
         ? "rgba(80,140,210,0.18)"
         : "rgba(255,255,255,0.05)";
+        ctx.lineWidth = 1.2;
 
-    ctx.lineWidth = 0.6;
+    
     ctx.beginPath();
     ctx.moveTo(a.x, a.y);
     ctx.lineTo(b.x, b.y);
@@ -283,9 +310,7 @@ function initConstellations() {
     bgStars.push(new BackgroundStar(canvas.width, canvas.height));
   }
 
-
   const constellations = [];
-
   const TARGET = 22;
   const MIN_DISTANCE = 260; // ← tune this
   let attempts = 0;
@@ -325,10 +350,11 @@ function initConstellations() {
   }
 
   function animate(time) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    if (heroFinished) {
+      return; }
     const delta = time - lastTime;
     lastTime = time;
-
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     // ⭐ background stars
     bgStars.forEach(s => {
@@ -346,7 +372,6 @@ function initConstellations() {
     if (!document.body.classList.contains("hero-done")) {
       drawRadialFocus();
     }
-
 
     requestAnimationFrame(animate);
   }
@@ -411,7 +436,7 @@ function enableScrollSkip() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       constellations.forEach(c => {
-        c.update(delta * 0.4); // 🔥 slow + controlled
+        c.update(delta * 0.6); // 🔥 slow + controlled
         c.draw(ctx);
       });
 
@@ -419,6 +444,9 @@ function enableScrollSkip() {
     }
     requestAnimationFrame(animate);
   }
+
+
+
 
 
 /* =========================================================
