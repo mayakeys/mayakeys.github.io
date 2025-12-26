@@ -3,10 +3,12 @@
    ========================================================= */
 
 let heroFinished = false;
+let heroAnimating = true;
 
 function finishHero() {
   if (heroFinished) return;
   heroFinished = true;
+  heroAnimating = false;
 
   document.body.classList.add("hero-done");
   document.body.style.overflow = "auto";
@@ -226,8 +228,8 @@ class Constellation {
   }
 
 
-
   if (this.theme === "hero" && mouse.x !== null && mouse.y !== null) {
+
     this.stars.forEach(s => {
       const d = Math.hypot(s.x - mouse.x, s.y - mouse.y);
 
@@ -384,7 +386,7 @@ function enableScrollSkip() {
     window.addEventListener("resize", resize);
 
     const constellations = [];
-    const COUNT = 6;
+    const COUNT = 8;
 
     for (let i = 0; i < COUNT; i++) {
       constellations.push(
@@ -399,6 +401,10 @@ function enableScrollSkip() {
 
     let lastTime = performance.now();
     function animate(time) {
+      if (heroAnimating) {
+        requestAnimationFrame(animate);
+       return;
+      }
       const delta = time - lastTime;
       lastTime = time;
 
