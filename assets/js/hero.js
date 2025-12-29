@@ -12,31 +12,7 @@ function finishHero() {
 
   document.body.classList.add("hero-done");
   document.body.style.overflow = "auto";
-
-  // removeHeroAfterTransition();
-  // remove hero AFTER animation completes
-  setTimeout(() => {
-    const hero = document.getElementById("hero");
-    if (hero) hero.remove();
-  }, 1200); // must be >= your hero transition time
 }
-
-// function removeHeroAfterTransition() {
-//   const hero = document.getElementById("hero");
-//   const heroImage = hero.querySelector(".hero-image");
-
-//   heroImage.addEventListener(
-//     "transitionend",
-//     (e) => {
-//       // only react to the transform finishing
-//       if (e.propertyName !== "transform") return;
-
-//       heroImage.style.display = "none";
-//       hero.remove(); 
-//     },
-//     { once: true }
-//   );
-// }
 
 
 function initHeroTyping() {
