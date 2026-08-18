@@ -135,18 +135,12 @@ body.hero-done .cursor {
   opacity: 0;
 }
 
-/* image slides to top-right and grows.
-   Anchored with `right` (not `left` + vw translate) so its
-   distance from the viewport's right edge stays constant —
-   matching .container's margin-right: 670px — instead of
-   drifting relative to the text at different window widths. */
+/* image slides to top-right and grows */
 body.hero-done .hero-image {
-  left: auto;
-  right: 300px;
-  transform: translateY(-20vh);
+  transform: translate(4vw, -20vh);
   border-radius: 3px;
   object-position: center 40%;
-  position: absolute;
+  position: absolute;   
   scale: 1.1;
   pointer-events: none;
 }
@@ -216,6 +210,12 @@ body.hero-done #site-content {
    MAIN CONTENT
    ========================================================= */
 
+.container {
+  max-width: 880px;
+  margin-left: 430px;
+  margin-right: 670px;  
+  margin-top: 50px;
+}
 
 /* name */
 h1 {
