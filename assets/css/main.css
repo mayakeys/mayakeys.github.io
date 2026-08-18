@@ -88,7 +88,7 @@ body.hero-done #hero {
     border-radius: 20px; 
     object-fit: cover;
     box-shadow: 0 20px 60px rgba(0,0,0,0.35); 
-    position: relative; 
+    position: absolute; 
     z-index: 5; 
     outline: 1px solid rgba(0,0,0,0.06); 
     outline-offset: -1px; 
