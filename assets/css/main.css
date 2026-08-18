@@ -210,12 +210,6 @@ body.hero-done #site-content {
    MAIN CONTENT
    ========================================================= */
 
-.container {
-  max-width: 880px;
-  margin-left: 430px;
-  margin-right: 670px;  
-  margin-top: 50px;
-}
 
 /* name */
 h1 {
@@ -302,5 +296,3 @@ a {
   color: var(--accent);
   font-weight: 500;
 }
-
-
