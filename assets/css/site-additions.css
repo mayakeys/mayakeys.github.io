@@ -1,6 +1,14 @@
-/* .container is defined in main.css (your original rule) —
-   intentionally not redeclared here, to avoid two competing
-   definitions. */
+/* .container's base rule is in main.css. Its margin-right: 670px
+   was reserving space for a photo that now lives OUTSIDE the text
+   flow (the absolutely-positioned .photo-stack), which squeezed
+   the text into a narrow column. Reduced here so the text uses
+   more width, while still stopping before the photo zone.
+   The photo stack sits ~180px from the container's right edge
+   and is 420px wide, so ~300px right margin keeps text clear. */
+
+.container {
+  margin-right: 300px;
+}
 
 /* =========================================================
    ABOUT ROW — name/bio on the left, headshot on the right
