@@ -1,13 +1,11 @@
-/* .container's base rule is in main.css. Its margin-right: 670px
-   was reserving space for a photo that now lives OUTSIDE the text
-   flow (the absolutely-positioned .photo-stack), which squeezed
-   the text into a narrow column. Reduced here so the text uses
-   more width, while still stopping before the photo zone.
-   The photo stack sits ~180px from the container's right edge
-   and is 420px wide, so ~300px right margin keeps text clear. */
+/* .container's base rule is in main.css. Rather than tune its
+   margin-right against the photo offset (two independent numbers
+   that kept overlapping), cap the TEXT width explicitly so it
+   physically cannot reach the photo zone. */
 
 .container {
-  margin-right: 300px;
+  margin-right: 0;
+  max-width: 560px;
 }
 
 /* =========================================================
@@ -27,7 +25,7 @@
 .photo-stack {
   position: absolute;
   top: 0;
-  right: -440px;
+  right: -520px;
   width: 420px;
   height: 420px;
 }
