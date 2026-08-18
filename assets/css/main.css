@@ -135,12 +135,18 @@ body.hero-done .cursor {
   opacity: 0;
 }
 
-/* image slides to top-right and grows */
+/* image slides to top-right and grows.
+   Anchored with `right` (not `left` + vw translate) so its
+   distance from the viewport's right edge stays constant —
+   matching .container's margin-right: 670px — instead of
+   drifting relative to the text at different window widths. */
 body.hero-done .hero-image {
-  transform: translate(4vw, -20vh);
+  left: auto;
+  right: 300px;
+  transform: translateY(-20vh);
   border-radius: 3px;
   object-position: center 40%;
-  position: absolute;   
+  position: absolute;
   scale: 1.1;
   pointer-events: none;
 }
