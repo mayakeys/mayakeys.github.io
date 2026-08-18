@@ -1,16 +1,6 @@
-/* =========================================================
-   CONTAINER — reverted to original fixed left/right margins
-   so the About text clears the headshot instead of running
-   under it. Not responsive below the width these margins
-   assume — flagged again in the mobile breakpoint below.
-   ========================================================= */
-
-.container {
-  max-width: 880px;
-  margin-left: 430px;
-  margin-right: 670px;
-  margin-top: 50px;
-}
+/* .container is defined in main.css (your original rule) —
+   intentionally not redeclared here, to avoid two competing
+   definitions. */
 
 /* =========================================================
    ABOUT ROW — name/bio on the left, headshot on the right
@@ -38,6 +28,45 @@
   object-fit: cover;
   flex-shrink: 0;
   box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+}
+
+/* =========================================================
+   PHOTO STACK — two overlapping, oppositely-tilted photos
+   for the About section (replaces the single headshot used
+   above, and the old sliding .hero-image once it lands).
+   Each photo is absolutely positioned within a fixed-size
+   wrapper so the tilt/offset stays consistent at any width.
+   ========================================================= */
+
+.photo-stack {
+  position: relative;
+  width: 420px;
+  height: 420px;
+  flex-shrink: 0;
+}
+
+.photo-stack img {
+  position: absolute;
+  width: 260px;
+  height: 260px;
+  object-fit: cover;
+  border-radius: 6px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.18);
+  border: 6px solid #fff;
+}
+
+.photo-stack img:nth-child(1) {
+  top: 0;
+  left: 0;
+  transform: rotate(-5deg);
+  z-index: 1;
+}
+
+.photo-stack img:nth-child(2) {
+  top: 140px;
+  left: 150px;
+  transform: rotate(6deg);
+  z-index: 2;
 }
 
 /* =========================================================
@@ -137,12 +166,6 @@
    ========================================================= */
 
 @media (max-width: 720px) {
-  .container {
-    margin-left: 0;
-    margin-right: 0;
-    padding: 0 24px;
-  }
-
   .about-row {
     flex-direction: column-reverse;
   }
@@ -163,5 +186,21 @@
 
   .work-grid {
     grid-template-columns: 1fr;
+  }
+
+  .photo-stack {
+    width: 300px;
+    height: 300px;
+    margin: 0 auto;
+  }
+
+  .photo-stack img {
+    width: 190px;
+    height: 190px;
+  }
+
+  .photo-stack img:nth-child(2) {
+    top: 100px;
+    left: 105px;
   }
 }
