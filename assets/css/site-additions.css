@@ -35,7 +35,7 @@
   position: relative;
   flex: 0 0 420px;
   width: 420px;
-  height: 480px;
+  height: 620px;
   margin-top: 2rem;
 }
 
@@ -64,10 +64,17 @@
 }
 
 .photo-stack img:nth-child(2) {
-  top: 180px;
-  left: 170px;
+  top: 140px;
+  left: 150px;
   transform: rotate(6deg);
   z-index: 2;
+}
+
+.photo-stack img:nth-child(3) {
+  top: 300px;
+  left: 40px;
+  transform: rotate(-8deg);
+  z-index: 3;
 }
 
 /* =========================================================
