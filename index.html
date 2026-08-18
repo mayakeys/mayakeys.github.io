@@ -1,160 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Maya Keys</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-  <link rel="stylesheet" href="assets/css/main.css">
-  <link rel="stylesheet" href="assets/css/site-additions.css">
+<meta charset="UTF-8">
+<title>DynPose Browser — Index</title>
+<style>
+  body { font-family: 'JetBrains Mono', monospace; background: #0d0f14; color: #d4d8e2;
+         max-width: 600px; margin: 60px auto; padding: 0 24px; }
+  h1 { color: #4f8ef7; font-size: 18px; margin-bottom: 8px; }
+  p { color: #6b7280; font-size: 12px; margin-bottom: 28px; }
+  ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  li a {
+    display: block; padding: 10px 16px;
+    background: #161920; border: 1px solid #252830; border-radius: 4px;
+    color: #4f8ef7; text-decoration: none; font-size: 13px;
+    transition: border-color 0.15s;
+  }
+  li a:hover { border-color: #4f8ef7; }
+</style>
 </head>
-
-<body class="hero-mode">
-
-
-<div id="hero">
-  <canvas id="particle-canvas"></canvas>
-  <div class="hero-bg"></div>
-  <div class="hero-content">
-    <div class="hero-text">
-      <h1 class="hero-name">Maya Keys</h1>
-      <div class="hero-tagline">
-        <div class="tagline-line primary">
-          <span id="typed-line-1"></span>
-        </div>
-        <div class="tagline-line secondary">
-          <span id="typed-line-2"></span><span class="cursor">|</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<img class="hero-image" src="assets/images/profile.jpg" />
-
-  <!-- MAIN SITE CONTENT -->
-  <div id="site-content" class="site-content">
-    <header class="nav">
-      <canvas id="nav-canvas"></canvas>
-
-      <div class="nav-inner">
-       <!-- LEFT: logo -->
-       <a href="index.html" class="nav-name nav-home">MK</a>
-
-       <!-- RIGHT: links -->
-        <nav class="nav-links">
-          <a href="#about" class="active">About</a>
-          <a href="projects.html">Research</a>
-          <a href="cv.html">CV</a>
-         <a href="#contact">Contact</a>
-        </nav>
-      </div>
-    </header>
-
-    <main class="container">
-
-      <!-- ===================================================
-           ABOUT
-           =================================================== -->
-      <div class="about-row">
-        <div class="about-text">
-          <h1>Maya Keys</h1>
-
-          <p>
-            I'm a 3rd year undergraduate student at <a href="https://www.caltech.edu/" class="inline-link">Caltech</a>, studying Computer Science with minor in Robotics.
-           I'm interested in computer vision and robotics with a focus on embodied perception, multimodal sensing, and visual reasoning.
-           I'm drawn to problems where agents must build 3D world models of their environment from multimodal sensory input
-           and use them for real-time reasoning and decision-making.
-          </p>
-
-          <p>
-             I am currently working in Caltech's <a href="https://aerospacerobotics.caltech.edu/" class="inline-link"> Autonomous Robotics and Control Lab</a> on MiniEELS,
-             a snake-like, high-DOF robotic platform inspired by <a href="https://www.jpl.nasa.gov/robotics-at-jpl/eels/" class="inline-link">JPL's EELS</a> for autonomous navigation in construction sites.
-          </p>
-
-           <p>
-             Previously, I've interned at NASA Jet Propulsion Laboratory working on Cassini CDA spectral analysis,
-             conducted NLP Automated Grading research with Prof. Adam Blank, and CV research for Morphogenisis Analysis with the Meyerowitz Lab.
-          </p>
-
-          <p>
-            <a href="cv.html">CV</a> ·
-            <a href="https://github.com/mayakeys">GitHub</a> ·
-            <a href="https://linkedin.com/in/maya-keys">LinkedIn</a> ·
-            <a href="mailto:mekeys@caltech.edu">Email</a>
-          </p>
-        </div>
-
-        <div class="photo-stack">
-          <img src="assets/images/profile.jpg" alt="Maya Keys">
-          <img src="assets/images/profile.jpg" alt="Maya Keys">
-        </div>
-      </div>
-
-      <!-- ===================================================
-           CURRENT PROJECTS
-           (placeholder copy + images — swap in real project
-           thumbnails and descriptions)
-           =================================================== -->
-      <h2 class="section-title">Current Projects</h2>
-
-      <div class="project-row">
-        <img class="project-thumb" src="https://placehold.co/360x360/111111/ffffff?text=Project+1" alt="">
-        <div class="project-body">
-          <div class="project-title">Placeholder Project Title One</div>
-          <p class="project-desc">
-            One or two sentences describing the project, the lab or context it's part of, and
-            what your specific contribution was. Keep it tight — this is a summary, not the
-            full writeup (that lives on the Research page).
-          </p>
-        </div>
-      </div>
-
-      <div class="project-row">
-        <img class="project-thumb" src="https://placehold.co/360x360/222222/ffffff?text=Project+2" alt="">
-        <div class="project-body">
-          <div class="project-title">Placeholder Project Title Two</div>
-          <p class="project-desc">
-            Same format as above — short description, one or two sentences, linking out to
-            more detail elsewhere if needed.
-          </p>
-        </div>
-      </div>
-
-      <!-- ===================================================
-           PREVIOUS WORK
-           (3-column grid — swap placeholder images + captions)
-           =================================================== -->
-      <h2 class="section-title">Previous Work</h2>
-
-      <div class="work-grid">
-        <div class="work-item">
-          <img class="work-thumb" src="https://placehold.co/400x300/e0e0e0/555555?text=Work+1" alt="">
-          <p class="work-caption">Short caption describing this piece of previous work and where it happened.</p>
-        </div>
-        <div class="work-item">
-          <img class="work-thumb" src="https://placehold.co/400x300/e0e0e0/555555?text=Work+2" alt="">
-          <p class="work-caption">Short caption describing this piece of previous work and where it happened.</p>
-        </div>
-        <div class="work-item">
-          <img class="work-thumb" src="https://placehold.co/400x300/e0e0e0/555555?text=Work+3" alt="">
-          <p class="work-caption">Short caption describing this piece of previous work and where it happened.</p>
-        </div>
-      </div>
-
-      <!-- ===================================================
-           CLOSING BLURB
-           =================================================== -->
-      <p class="closing-blurb">
-        Placeholder closing note — a sentence or two about what you're looking for next
-        (internships, collaborators, PhD programs), or a personal line to close the page out.
-        Replace with real copy once the layout feels right.
-      </p>
-
-    </main>
-  </div>
-
-  <!-- Your JS path -->
-  <script src="assets/js/hero.js"></script>
+<body>
+<h1>DYNPOSE BROWSER</h1>
+<p>First 500 videos · 10 pages · 50 videos/page<br>
+   Frames show the pose-covered segment only.</p>
+<ul>
+    <li><a href="page_001.html">Page 1 — videos 1–50</a></li>
+    <li><a href="page_002.html">Page 2 — videos 51–100</a></li>
+    <li><a href="page_003.html">Page 3 — videos 101–150</a></li>
+    <li><a href="page_004.html">Page 4 — videos 151–200</a></li>
+    <li><a href="page_005.html">Page 5 — videos 201–250</a></li>
+    <li><a href="page_006.html">Page 6 — videos 251–300</a></li>
+    <li><a href="page_007.html">Page 7 — videos 301–350</a></li>
+    <li><a href="page_008.html">Page 8 — videos 351–400</a></li>
+    <li><a href="page_009.html">Page 9 — videos 401–450</a></li>
+    <li><a href="page_010.html">Page 10 — videos 451–500</a></li>
+</ul>
 </body>
 </html>

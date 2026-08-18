@@ -1,47 +1,52 @@
-/* .container's base rule is in main.css. Rather than tune its
-   margin-right against the photo offset (two independent numbers
-   that kept overlapping), cap the TEXT width explicitly so it
-   physically cannot reach the photo zone. */
+/* .container's base rule in main.css has margin-left: 430px and
+   margin-right: 670px, tuned for the old single-image layout.
+   Override both here and use a wider centered column, because
+   the About row below is now a real two-column flex layout that
+   manages the text/photo split itself. !important is used only
+   to guarantee this wins over main.css regardless of load order. */
 
 .container {
-  margin-right: 0;
-  max-width: 560px;
+  max-width: 1100px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding: 0 40px;
 }
 
 /* =========================================================
-   ABOUT ROW — name/bio on the left, headshot on the right
-   (keeps your current layout, just gives it a class hook
-   so it plays nicely with the sections below)
+   ABOUT ROW — two-column flex: text left, photo stack right.
+   Siblings in a flex row cannot overlap — the layout itself
+   keeps them apart, no absolute positioning or offsets.
    ========================================================= */
 
 .about-row {
-  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 3rem;
 }
 
 .about-row .about-text {
-  max-width: 100%;
+  flex: 1 1 0;
+  min-width: 0;
 }
 
 .photo-stack {
-  position: absolute;
-  top: 0;
-  right: -520px;
-  width: 420px;
+  position: relative;
+  flex: 0 0 380px;
+  width: 380px;
   height: 420px;
 }
 
 /* =========================================================
-   PHOTO STACK — two overlapping, oppositely-tilted photos
-   for the About section (replaces the single headshot used
-   above, and the old sliding .hero-image once it lands).
-   Positioned absolutely, out of the text flow, anchored to
-   the right — same role the old single hero-image had.
+   PHOTO STACK — two overlapping, oppositely-tilted photos.
+   Positioned absolutely WITHIN the .photo-stack box only, so
+   the tilt/overlap is self-contained and the box itself is a
+   normal flex child that reserves its own space.
    ========================================================= */
 
 .photo-stack img {
   position: absolute;
-  width: 260px;
-  height: 260px;
+  width: 240px;
+  height: 240px;
   object-fit: cover;
   border-radius: 6px;
   box-shadow: 0 12px 30px rgba(0,0,0,0.18);
@@ -57,7 +62,7 @@
 
 .photo-stack img:nth-child(2) {
   top: 140px;
-  left: 150px;
+  left: 130px;
   transform: rotate(6deg);
   z-index: 2;
 }
@@ -159,12 +164,15 @@
    ========================================================= */
 
 @media (max-width: 720px) {
+  .about-row {
+    flex-direction: column;
+  }
+
   .photo-stack {
-    position: static;
+    flex: none;
     width: 300px;
-    height: 300px;
+    height: 320px;
     margin: 2rem auto 0;
-    right: auto;
   }
 
   .project-row {
