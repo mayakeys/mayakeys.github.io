@@ -9,41 +9,28 @@
    ========================================================= */
 
 .about-row {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 3rem;
-  margin-bottom: 4rem;
+  position: relative;
 }
 
 .about-row .about-text {
-  flex: 1;
-  min-width: 0;
+  max-width: 100%;
 }
 
-.about-row .headshot {
-  width: 220px;
-  height: 220px;
-  border-radius: 12px;
-  object-fit: cover;
-  flex-shrink: 0;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+.photo-stack {
+  position: absolute;
+  top: 0;
+  right: -240px;
+  width: 420px;
+  height: 420px;
 }
 
 /* =========================================================
    PHOTO STACK — two overlapping, oppositely-tilted photos
    for the About section (replaces the single headshot used
    above, and the old sliding .hero-image once it lands).
-   Each photo is absolutely positioned within a fixed-size
-   wrapper so the tilt/offset stays consistent at any width.
+   Positioned absolutely, out of the text flow, anchored to
+   the right — same role the old single hero-image had.
    ========================================================= */
-
-.photo-stack {
-  position: relative;
-  width: 420px;
-  height: 420px;
-  flex-shrink: 0;
-}
 
 .photo-stack img {
   position: absolute;
@@ -166,13 +153,12 @@
    ========================================================= */
 
 @media (max-width: 720px) {
-  .about-row {
-    flex-direction: column-reverse;
-  }
-
-  .about-row .headshot {
-    width: 140px;
-    height: 140px;
+  .photo-stack {
+    position: static;
+    width: 300px;
+    height: 300px;
+    margin: 2rem auto 0;
+    right: auto;
   }
 
   .project-row {
@@ -186,12 +172,6 @@
 
   .work-grid {
     grid-template-columns: 1fr;
-  }
-
-  .photo-stack {
-    width: 300px;
-    height: 300px;
-    margin: 0 auto;
   }
 
   .photo-stack img {
